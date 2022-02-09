@@ -3,14 +3,12 @@ extern crate graphics;
 extern crate opengl_graphics;
 extern crate piston;
 
-use std::panic::AssertUnwindSafe;
-use glutin_window::{GlutinWindow as Window, GlutinWindow};
+use glutin_window::GlutinWindow;
 use graphics::ellipse::circle;
 use opengl_graphics::{GlGraphics, OpenGL};
 use piston::event_loop::{EventSettings, Events};
 use piston::input::{RenderArgs, RenderEvent, UpdateArgs, UpdateEvent};
 use piston::window::WindowSettings;
-use std::f64::consts::PI;
 use std::process::Command;
 
 
@@ -47,15 +45,15 @@ impl Game{
         self.x2 = self.x1 + (self.r2 * self.a2.sin());
         self.y2 = self.y1 + (self.r2 * self.a2.cos());
 
-        let WHITE: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
-        let BLACK: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
+        let white: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
+        let black: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
         let (x, y) = (args.window_size[0] / 2.0, args.window_size[1] / 3.0);
 
 
 
 
         self.gl.draw(args.viewport(), |c, gl|{
-            graphics::clear(WHITE, gl);
+            graphics::clear(white, gl);
 
             let transform = c
                 .transform
@@ -65,14 +63,14 @@ impl Game{
             let circle1 = circle(self.x1, self.y1, self.m1);
             let circle2 = circle(self.x2, self.y2, self.m2);
 
-            line(BLACK, 0.5, [0.0, 0.0, self.x1, self.y1], transform, gl);
-            line(BLACK, 0.5, [self.x1, self.y1, self.x2, self.y2], transform, gl);
-            ellipse(BLACK, circle1, transform, gl);
-            ellipse(BLACK, circle2, transform, gl);
+            line(black, 0.5, [0.0, 0.0, self.x1, self.y1], transform, gl);
+            line(black, 0.5, [self.x1, self.y1, self.x2, self.y2], transform, gl);
+            ellipse(black, circle1, transform, gl);
+            ellipse(black, circle2, transform, gl);
 
         });
     }
-    fn update(&mut self, args: &UpdateArgs) {
+    fn update(&mut self, _args: &UpdateArgs) {
 
         let g = 1.0;
 
@@ -86,7 +84,7 @@ impl Game{
         self.a1_a = 0.1 *((num1 + num2 + num3 * num4) / den);
 
         num1 = 2.0 * (self.a1 - self.a2).sin();
-        num2 = (self.a1_v * self.a1_v * self.r1 * (self.m1 + self.m2));
+        num2 = self.a1_v * self.a1_v * self.r1 * (self.m1 + self.m2);
         num3 = g * (self.m1 + self.m2) * self.a1.cos();
         num4 = self.a2_v *  self.a2_v * self.r2 * self.m2 * (self.a1 - self.a2).cos();
 
