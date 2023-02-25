@@ -11,6 +11,8 @@ use piston::input::{RenderArgs, RenderEvent, UpdateArgs, UpdateEvent};
 use piston::window::WindowSettings;
 use std::process::Command;
 
+//REFERENCE: https://www.myphysicslab.com/pendulum/double-pendulum-en.html
+
 
 struct Game {
     gl: GlGraphics,
