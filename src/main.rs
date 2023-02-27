@@ -51,9 +51,6 @@ impl Game{
         let black: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
         let (x, y) = (args.window_size[0] / 2.0, args.window_size[1] / 3.0);
 
-
-
-
         self.gl.draw(args.viewport(), |c, gl|{
             graphics::clear(white, gl);
 
@@ -69,7 +66,6 @@ impl Game{
             line(black, 0.5, [self.x1, self.y1, self.x2, self.y2], transform, gl);
             ellipse(black, circle1, transform, gl);
             ellipse(black, circle2, transform, gl);
-
         });
     }
     fn update(&mut self, _args: &UpdateArgs) {
@@ -94,17 +90,11 @@ impl Game{
 
         self.a2_a =  0.1* ((num1)*(num2+num3+num4)) / den;
 
-
         self.a1_v += self.a1_a;
         self.a2_v += self.a2_a;
         self.a1 += self.a1_v;
         self.a2 += self.a2_v;
-
-
-
     }
-
-
 }
 
 fn main() {
@@ -116,7 +106,6 @@ fn main() {
         .exit_on_esc(true)
         .build()
         .unwrap();
-
 
     let mut game = Game {
         gl: GlGraphics::new(opengl),
@@ -137,23 +126,17 @@ fn main() {
 
         x2: 0.0,
         y2: 0.0,
-
     };
 
 
     let mut events = Events::new(EventSettings::new());
 
     while let Some(e) = events.next(&mut window) {
-
-
-
         if let Some(args) = e.render_args() {
             game.render(&args);
         }
-
         if let Some(args) = e.update_args() {
             game.update(&args);
         }
-
     }
 }
