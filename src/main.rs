@@ -9,10 +9,12 @@ use opengl_graphics::{GlGraphics, OpenGL};
 use piston::event_loop::{EventSettings, Events};
 use piston::input::{RenderArgs, RenderEvent, UpdateArgs, UpdateEvent};
 use piston::window::WindowSettings;
-use std::process::Command;
+
 
 //REFERENCE: https://www.myphysicslab.com/pendulum/double-pendulum-en.html
 
+//TODO: ADD Position and weight customization via cli
+//TODO: ADD Trace to both balls
 
 struct Game {
     gl: GlGraphics,
